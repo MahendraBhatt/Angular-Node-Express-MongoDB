@@ -1,0 +1,129 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="keyword" [(ngModel)]="valveNo" />
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="searchValveNo()">
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1">
+    <button type="button" class="btn btn-primary" routerLink="/add">Add</button>
+  </div>
+  <div class="col-md-7">
+    <button type="button" class="btn btn-primary" (click)="flUpload.click()">Upload</button>
+    <div style="display: none;">
+      <input type="file" #flUpload (change)="onFileChange($event)" multiple="false" value="Upload" />
+    </div>
+  </div>
+</div>
+<i>{{ count }} records found</i>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col">
+        <a href="#" (click)="sort('valveNo')">
+          Valve No
+          <i *ngIf="sortBy == 'valveNo' && reverseSort == false" class="fa fa-caret-up" aria-hidden="true"></i>
+          <i *ngIf="sortBy == 'valveNo' && reverseSort == true" class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+      </th>
+      <th scope="col">
+        <a href="#" (click)="sort('tagNo')">
+          Tag No
+          <i *ngIf="sortBy == 'tagNo' && reverseSort == false" class="fa fa-caret-up" aria-hidden="true"></i>
+          <i *ngIf="sortBy == 'tagNo' && reverseSort == true" class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+      </th>
+      <th scope="col">
+        <a href="#" (click)="sort('valveSection')">
+          Valve Section
+          <i *ngIf="sortBy == 'valveSection' && reverseSort == false" class="fa fa-caret-up" aria-hidden="true"></i>
+          <i *ngIf="sortBy == 'valveSection' && reverseSort == true" class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+      </th>
+      <th scope="col">
+        <a href="#" (click)="sort('valveSerialNo')">
+          Valve Serial No
+          <i *ngIf="sortBy == 'valveSerialNo' && reverseSort == false" class="fa fa-caret-up" aria-hidden="true"></i>
+          <i *ngIf="sortBy == 'valveSerialNo' && reverseSort == true" class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+      </th>
+      <th scope="col">
+        <a href="#" (click)="sort('valveMake')">
+          Valve Make
+          <i *ngIf="sortBy == 'valveMake' && reverseSort == false" class="fa fa-caret-up" aria-hidden="true"></i>
+          <i *ngIf="sortBy == 'valveMake' && reverseSort == true" class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+      </th>
+      <th scope="col">
+        <a href="#" (click)="sort('valvePurchaseDate')">
+          Valve Purchase Date
+          <i *ngIf="sortBy == 'valvePurchaseDate' && reverseSort == false" class="fa fa-caret-up"
+            aria-hidden="true"></i>
+          <i *ngIf="sortBy == 'valvePurchaseDate' && reverseSort == true" class="fa fa-caret-down"
+            aria-hidden="true"></i>
+        </a>
+      </th>
+      <th scope="col">
+        <a href="#" (click)="sort('valvePurchaseValue')">
+          Valve Purchase Value
+          <i *ngIf="sortBy == 'valvePurchaseValue' && reverseSort == false" class="fa fa-caret-up"
+            aria-hidden="true"></i>
+          <i *ngIf="sortBy == 'valvePurchaseValue' && reverseSort == true" class="fa fa-caret-down"
+            aria-hidden="true"></i>
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let r of rf| paginate : {
+        itemsPerPage: pageSize,
+        currentPage: page,
+        totalItems: count
+      }; let i = index" [class.active]="i == currentIndex">
+      <th scope="row">
+        <a routerLink="/rf/{{ r.id }}">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </a>
+      </th>
+      <th scope="row">
+        <a href="#" (click)="deleteRf(r.id)">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+      </th>
+      <td>{{ r.valveNo }}</td>
+      <td>{{ r.tagNo }}</td>
+      <td>{{ r.valveSection }}</td>
+      <td>{{ r.valveSerialNo }}</td>
+      <td>{{ r.valveMake }}</td>
+      <td>{{ r.valvePurchaseDate }}</td>
+      <td>{{ r.valvePurchaseValue }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!--     
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllRfs()">
+      Remove All
+    </button> -->
+<!-- <div class="mt-3">
+      ...
+  
+      Items per Page:
+      <select (change)="handlePageSizeChange($event)">
+        <option *ngFor="let size of pageSizes" [ngValue]="size">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+  </div> -->
+
+<div class="col-md-12">
+  <pagination-controls previousLabel="Prev" nextLabel="Next" [responsive]="true"
+    (pageChange)="handlePageChange($event)"></pagination-controls>
+</div>

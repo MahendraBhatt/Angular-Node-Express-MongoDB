@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+a, a:visited, a:hover, a:active{
+    color:#337ab7;
+    text-decoration: none;
+}
+
+.fa-pencil-square-o, .fa-trash{
+    font-size: 22px !important;
+}
