@@ -17,12 +17,8 @@
 
 <div>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">RF</a>
-    <!-- <div class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a routerLink="rf" class="nav-link">RF</a>
-      </li>
-    </div> -->
+    <a href="#" class="navbar-brand">CloudAsset</a>
+    <a href="#" class="logout" (click)="logout()" *ngIf="isLoggedIn()">Sign out <i class="fa fa-sign-out" aria-hidden="true"></i></a>
   </nav>
 
   <div class="container">

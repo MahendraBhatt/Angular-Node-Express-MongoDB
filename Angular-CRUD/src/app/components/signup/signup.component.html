@@ -1,0 +1,61 @@
+<div class="container">
+    <h3>Sign Up to CloudAsset</h3>
+    <br><br>
+    <form [formGroup]="signupForm" (ngSubmit)="createUser()">
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name"
+                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required formControlName="name"
+                    name="name" />
+                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">Name is required</div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" email
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required formControlName="email"
+                    name="email" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Email is not valid</div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phoneNumber" 
+                    [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" required
+                    formControlName="phoneNumber" name="phoneNumber" />
+                <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                    <div *ngIf="f.phoneNumber.errors.required">Phone number is required</div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password"
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required formControlName="password"
+                    name="password" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,13 +1,2 @@
-<ActionBar>
-  <Label text="Home"></Label>
-</ActionBar>
-
-<GridLayout>
-  <ListView [items]="items">
-    <ng-template let-item="item">
-      <StackLayout [nsRouterLink]="['../item', item.id]">
-        <Label [text]="item.name"></Label>
-      </StackLayout>
-    </ng-template>
-  </ListView>
-</GridLayout>
+<ActionBar title="YOUR APP"></ActionBar>
+<Label class="body m-20" [text]="message" textWrap="true"></Label>

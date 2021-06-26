@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core'
-
-import { DataService, DataItem } from '../shared/data.service'
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'Home',
-  templateUrl: './home.component.html',
+    selector: "app-home",
+    moduleId: module.id,
+    templateUrl: "./home.component.html",
+    styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  items: Array<DataItem>
+    message = "You have successfully authenticated. This is where you build your core application functionality.";
 
-  constructor(private _itemService: DataService) {}
+    constructor() {
+    }
 
-  ngOnInit(): void {
-    this.items = this._itemService.getItems()
-  }
+    ngOnInit(): void {
+    }
 }

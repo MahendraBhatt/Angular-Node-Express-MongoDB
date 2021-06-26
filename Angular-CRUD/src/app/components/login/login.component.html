@@ -1,0 +1,46 @@
+<div class="container">
+    <br />
+    <h3>Sign in to CloudAsset</h3>
+    <br>
+    <div class="loginpanel">
+        <form [formGroup]="loginForm" (submit)="loginUser()">
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" email
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                    required formControlName="email" name="email" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                        <div *ngIf="f.email.errors.email">Email is not valid</div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" 
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                    required formControlName="password" name="password" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-secondary btn-block" (click)="signUp()" >New User ? Sign up</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
