@@ -35,6 +35,7 @@ npm install ngx-pagination --save
 npm install -g @angular/cli
 ng new my-app
 npm install font-awesome --save
+npm install @auth0/angular-jwt
 
 ### Node.js Server
 ```

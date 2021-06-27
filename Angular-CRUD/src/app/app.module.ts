@@ -11,6 +11,8 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { JwtInterceptor } from 'src/app/helpers/jwt.interceptor';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { JwtInterceptor } from 'src/app/helpers/jwt.interceptor';
     RfListComponent,
     ConfirmationDialogComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

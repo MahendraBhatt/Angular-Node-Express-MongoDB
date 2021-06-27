@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Rf } from '../models/rf.model';
+import { environment } from 'src/environments/environment';
 
-// const baseUrl = '/api/rf';
-const baseUrl = 'http://localhost:3000/api/rf';
+var baseUrl = 'http://localhost:3000/api/rf';
+if (environment.production) {
+  baseUrl = '/api/rf';
+}
 
 @Injectable({
   providedIn: 'root'
