@@ -17,6 +17,8 @@ export class UserService {
 
     login(user: User) {
         return new Promise((resolve, reject) => {
+            
+            https://cloudasset.el.r.appspot.com/api/user/login
             // Kinvey.User.logout()
             //     .then(() => {
             //         Kinvey.User.login(user.email, user.password)

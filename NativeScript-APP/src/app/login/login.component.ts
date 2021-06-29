@@ -2,10 +2,12 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { alert, prompt } from "@nativescript/core/ui/dialogs";
 import { Page } from "@nativescript/core/ui/page";
+import { Http } from '@nativescript/core';
+import { getString, setString } from '@nativescript/core/application-settings';
+
 
 import { User } from "~/shared/user.model";
 //import { UserService } from "~/shared/user.service";
-
 @Component({
     selector: "app-login",
     moduleId: module.id,
@@ -45,13 +47,49 @@ export class LoginComponent {
     }
 
     login() {
-        // this.userService.login(this.user)
-        //     .then(() => {
-        //         this.router.navigate(["/home"]);
-        //     })
-        //     .catch(() => {
-        //         this.alert("Unfortunately we could not find your account.");
-        //     });
+        // Http.request({
+        //     url: 'https://httpbin.org/get',
+        //     //url: 'https://httpbi554n.org/get',
+        //     method: 'GET'
+        //   }).then(
+        //     (response) => {
+        //       // Argument (response) is HttpResponse
+        //       this.alert(`Response Status Code: ${response.statusCode}`)
+        //       console.log(`Response Headers: ${response.statusCode}`)
+        //       console.log(`Response Content: ${response.content}`)
+        //     },
+        //     e => {
+        //         this.alert(`Error: ${e}`)
+        //     }
+        //   )
+
+        //this.router.navigate(["/home"]);
+        
+        Http.request({
+            url: "https://cloudasset.el.r.appspot.com/api/user/login",
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            content: JSON.stringify({
+              email: this.user.email,
+              password: this.user.password,
+            }),
+          }).then(
+            (response) => {
+                const result = response.content.toJSON();
+                if(response.statusCode == 200){
+                    //console.log(response);
+                    setString("token", result.token.toString());
+                    this.isLoggingIn = true;
+                    this.router.navigate(["/home"]);
+                } else {
+                    this.alert(result.msg)
+                }
+            },
+            (e) => {
+                console.log(e);
+                this.alert(`Error: ${e}`)
+            }
+          );
     }
 
     register() {
@@ -72,19 +110,36 @@ export class LoginComponent {
     forgotPassword() {
         prompt({
             title: "Forgot Password",
-            message: "Enter the email address you used to register for APP NAME to reset your password.",
+            message: "Enter the email address you used to register for Cloud Asset to reset your password.",
             inputType: "email",
             defaultText: "",
             okButtonText: "Ok",
             cancelButtonText: "Cancel"
         }).then((data) => {
             if (data.result) {
-                // this.userService.resetPassword(data.text.trim())
-                //     .then(() => {
-                //         this.alert("Your password was successfully reset. Please check your email for instructions on choosing a new password.");
-                //     }).catch(() => {
-                //         this.alert("Unfortunately, an error occurred resetting your password.");
-                //     });
+                Http.request({
+                    url: "https://cloudasset.el.r.appspot.com/api/user/forgotPassword",
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    content: JSON.stringify({
+                      email: data.text.trim()
+                    }),
+                  }).then(
+                    (response) => {
+                        if(response.statusCode == 200){
+                            this.alert("Your password was successfully reset. Please check your email for instructions on choosing a new password.");
+                        } else {
+                            const result = response.content.toJSON();
+                            this.alert(result.error)
+                        }
+                    },
+                    (e) => {
+                        console.log(e);
+                        this.alert(`Error: ${e}`)
+                        //this.alert("Unfortunately, an error occurred resetting your password.");
+                    }
+                  );
+                
             }
         });
     }
@@ -100,7 +155,7 @@ export class LoginComponent {
 
     alert(message: string) {
         return alert({
-            title: "APP NAME",
+            title: "Cloud Asset",
             okButtonText: "OK",
             message: message
         });

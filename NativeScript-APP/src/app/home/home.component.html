@@ -1,2 +1,19 @@
-<ActionBar title="YOUR APP"></ActionBar>
-<Label class="body m-20" [text]="message" textWrap="true"></Label>
+<ActionBar title="Cloud Asset"></ActionBar>
+<FlexboxLayout>
+    <StackLayout>
+        <!-- <StackLayout>
+            <Label class="body m-20" [text]="message" textWrap="true">Home</Label>
+        </StackLayout> -->
+        <StackLayout>
+            <ListView [items]="items" (itemTap)="onItemTap($event)" class="list-group">
+                <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                    <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+                    <GridLayout>
+                        <Label [text]="item.valveNo" class="list-group-item"></Label>
+                    </GridLayout>
+                </ng-template>
+            </ListView>
+        </StackLayout>
+        <Button [text]="isLoggingIn ? 'Sign Out' : 'Sign In'" (tap)="submit()" class="btn btn-primary m-t-20"></Button>
+    </StackLayout>
+</FlexboxLayout>

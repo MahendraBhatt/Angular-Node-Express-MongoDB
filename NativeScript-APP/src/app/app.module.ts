@@ -4,6 +4,7 @@ import { NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModu
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./login/login.component";
+import { HomeComponent } from "./home/home.component";
 
 //import { UserService } from "./shared/user.service";
 
@@ -19,7 +20,8 @@ import { LoginComponent } from "./login/login.component";
     ],
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        HomeComponent
     ],
     providers: [
         //UserService

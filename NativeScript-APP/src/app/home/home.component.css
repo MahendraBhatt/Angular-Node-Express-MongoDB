@@ -1,0 +1,14 @@
+
+.btn-primary {
+  height: 50;
+  margin: 20 5 15 5;
+  color: #fff;
+  background-color: #1c88ab;
+  border-radius: 5;
+  font-size: 20;
+  font-weight: 600;
+}
+
+.list-group{
+  height: 90%;
+}

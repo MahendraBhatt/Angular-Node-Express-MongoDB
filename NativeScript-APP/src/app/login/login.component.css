@@ -1,30 +1,33 @@
 .page {
   align-items: center;
   flex-direction: column;
+  width: 80%;
 }
 .form {
   margin-left: 30;
   margin-right: 30;
   flex-grow: 2;
   vertical-align: middle;
+  width: 100%;
 }
 
 .logo {
   margin-bottom: 12;
-  height: 90;
+  height: 100;
   font-weight: bold;
 }
+
 .header {
   text-align: center;
   font-size: 25;
   font-weight: 600;
   margin-bottom: 70;
   text-align: center;
-  color: #D51A1A;
+  color: #1c88ab;
 }
 
 .input-field {
-  margin-bottom: 25;
+  margin-bottom: 15;
 }
 .input {
   font-size: 18;
@@ -33,8 +36,9 @@
 
 .btn-primary {
   height: 50;
-  margin: 30 5 15 5;
-  background-color: #D51A1A;
+  margin: 20 5 15 5;
+  color: #fff;
+  background-color: #1c88ab;
   border-radius: 5;
   font-size: 20;
   font-weight: 600;
