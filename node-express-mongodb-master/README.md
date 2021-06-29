@@ -38,25 +38,18 @@ Integration (run back-end & front-end on same server/port)
 ## Project setup
 ```
 npm install
+
+npm install mongoose-paginate-v2
+npm install --save xlsx
+npm install --save nodemailer
+
+npm install --save mongoose-unique-validator bcrypt jsonwebtoken
+
 ```
 
 ### Run
 ```
 node server.js
 ```
-
-npm install mongoose-paginate-v2
-npm install --global @nativescript/schematics
-ng add @nativescript/schematics
-npm install nativescript
-npm install --global nativescript
-npm install nativescript-dev-webpack
-npm install --save xlsx
-npm install --save nodemailer
-
-npm install --save mongoose-unique-validator bcrypt jsonwebtoken
-
-tns run ios --bundle— to build an iOS app from the code-sharing project
-tns run android --bundle — to build an Android app from the code-sharing project
 
 gcloud app deploy

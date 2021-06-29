@@ -63,33 +63,33 @@ export class LoginComponent {
         //     }
         //   )
 
-        //this.router.navigate(["/home"]);
+        this.router.navigate(["/home"]);
         
-        Http.request({
-            url: "https://cloudasset.el.r.appspot.com/api/user/login",
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            content: JSON.stringify({
-              email: this.user.email,
-              password: this.user.password,
-            }),
-          }).then(
-            (response) => {
-                const result = response.content.toJSON();
-                if(response.statusCode == 200){
-                    //console.log(response);
-                    setString("token", result.token.toString());
-                    this.isLoggingIn = true;
-                    this.router.navigate(["/home"]);
-                } else {
-                    this.alert(result.msg)
-                }
-            },
-            (e) => {
-                console.log(e);
-                this.alert(`Error: ${e}`)
-            }
-          );
+        // Http.request({
+        //     url: "https://cloudasset.el.r.appspot.com/api/user/login",
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     content: JSON.stringify({
+        //       email: this.user.email,
+        //       password: this.user.password,
+        //     }),
+        //   }).then(
+        //     (response) => {
+        //         const result = response.content.toJSON();
+        //         if(response.statusCode == 200){
+        //             //console.log(response);
+        //             setString("token", result.token.toString());
+        //             this.isLoggingIn = true;
+        //             this.router.navigate(["/home"]);
+        //         } else {
+        //             this.alert(result.msg)
+        //         }
+        //     },
+        //     (e) => {
+        //         console.log(e);
+        //         this.alert(`Error: ${e}`)
+        //     }
+        //   );
     }
 
     register() {
