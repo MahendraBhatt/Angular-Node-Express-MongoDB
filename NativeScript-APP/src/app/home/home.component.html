@@ -1,22 +1,35 @@
-<ActionBar title="Cloud Asset"></ActionBar>
-<FlexboxLayout>
-    <StackLayout>
-        <!-- <StackLayout>
-            <Label class="body m-20" [text]="message" textWrap="true">Home</Label>
-        </StackLayout> -->
-        <StackLayout>
-            <ListView [items]="items" (itemTap)="onItemTap($event)" class="list-group">
-                <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
-                    <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
-                    <GridLayout>
-                        <Label [text]="item.valveNo" class="list-group-item"></Label>
-                    </GridLayout>
-                </ng-template>
-            </ListView>
-        </StackLayout>
-    <StackLayout>
-        <Button [text]="'Start Camera'" (tap)="submit()" class="btn btn-primary m-t-20"></Button>
+<Drawer>
+    <StackLayout leftDrawer backgroundColor="#3c495e">
+        <ListItem (itemTap)="submit()">
+            <Label class="body m-20" text="Sign Out"></Label>
+        </ListItem>
     </StackLayout>
-        <Button [text]="isLoggingIn ? 'Sign Out' : 'Sign In'" (tap)="submit()" class="btn btn-primary m-t-20"></Button>
+    <StackLayout mainContent backgroundColor="white">
+        <ActionBar title="Cloud Asset"></ActionBar>
+        <FlexboxLayout>
+            <StackLayout>
+                <!-- <StackLayout>
+                    <Label class="body m-20" [text]="message" textWrap="true">Home</Label>
+                </StackLayout> -->
+                <StackLayout>
+                    <ListView [items]="items" (itemTap)="onItemTap($event)" class="list-group">
+                        <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                            <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+                            <GridLayout>
+                                <Label [text]="item.valveNo" class="list-group-item"></Label>
+                            </GridLayout>
+                        </ng-template>
+                    </ListView>
+                </StackLayout>
+                <!-- <StackLayout>
+                    <Image [(ngModel)]="image"></Image>
+                </StackLayout> -->
+                <!-- <StackLayout>
+                    <Button [text]="'Start Camera'" (tap)="startCamera()" class="btn btn-primary m-t-20"></Button>
+                </StackLayout> -->
+                <Button [text]="isLoggingIn ? 'Sign Out' : 'Sign In'" (tap)="submit()"
+                    class="btn btn-primary m-t-20"></Button>
+            </StackLayout>
+        </FlexboxLayout>
     </StackLayout>
-</FlexboxLayout>
+</Drawer>
