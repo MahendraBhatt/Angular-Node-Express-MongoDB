@@ -16,37 +16,57 @@ export class Rf {
   valveTorque?: string;
   butterflyVaneMOC?: string;
   butterflyVaneMOCOther?: string;
-  ifSafetyValve ?: string;   
-  lineFluid?: string;	
-  serviceType?: string; // hazardous , corosive
-  lineSize?: string; // in inch
-  valveSize?: string; // in inch
-  flow?: string; 
-  inletPressure?: string;
+  ifSafetyValve?: string;
+  setPressure?: string;
+  overPressure?: string;
+  backPressure?: string;
+  relievingPressure?: string;
+  lineFluid?: string;
+  serviceType?: string;
+  lineSize?: string; 
+  valveSize?: string; 
+  flow1?: string;
+  flow1Unit?: string;
+  flow2?: string;
+  flow2Unit?: string;
+  flow3?: string;
+  flow3Unit?: string;
+  inletPressure1?: string;
+  inletPressure2?: string;
+  inletPressure3?: string;
   pressureDifference?: string;
   designPressure?: string;
+  designPressureUnit?: string;
   designTemp?: string;
+  designTempUnit?: string;
   viscosity?: string;
+  viscosityUnit?: string;
   specificGravity?: string;
-  molecularWeight ?: string;
+  molecularWeight?: string;
   actuatorShutoffPressure?: string;
-  valveLiftPercentage?: string;
-  valveNoise?: string;	
+  actuatorShutoffPressureUnit?: string;
+  valveLiftPercentage1?: string;
+  valveLiftPercentage2?: string;
+  valveLiftPercentage3?: string;
+  valveNoise?: string;
   designCV?: string;
-  calculatedCV?: string;
+  calculatedCV1?: string;
+  calculatedCV2?: string;
+  calculatedCV3?: string;
   bodyMOC?: string;
   bodyLining?: string;
   endConnection?: string;
   flangeRating?: string;
   valveModelNo?: string;
   trimSize?: string;
+  trimSizeUnit?: string;
   trimType?: string;
-  trimcCharacteristic?: string; // 	Inline radio buttons
+  trimcCharacteristic?: string;
   trimMOC?: string;
   ballValveSeatMOC?: string;
   plugRingsMOC?: string;
   seatArrangement?: string;
-  glandPacking?: string; // 	Inline radio buttons
+  glandPacking?: string;
   bodyBonnetGasket?: string;
   valveBonnetType?: string;
   bellowSeal?: string;
@@ -59,10 +79,11 @@ export class Rf {
   actuatorTravel?: string;
   diaphragMaterial?: string;
   airPressureRequired?: string;
+  airPressureRequiredUnit?: string;
   springRange?: string;
   springMOC?: string;
-  positionerType?: string; //	Inline radio buttons
-  modelNoOfPositioner ?: string;
+  positionerType?: string;
+  modelNoOfPositioner?: string;
   ePArea?: string;
   aFRMake?: string;
   aFRModel?: string;
@@ -79,14 +100,15 @@ export class Rf {
   solenoidValveMake?: string;
   machNoExceeding?: string;
   velocityExceeding?: string;
-  stelliting?: string; //	Inline radio button
-  lapping?: string; //		Inline radio button
-  nitriding?: string; //	 	Inline radio button
-  iBR?: string; //		Inline radio Button
+  stelliting?: string;
+  lapping?: string;
+  nitriding?: string;
+  iBR?: string;
   failSafeAction?: string;
   limitSwitch?: string;
   limitSwitchMake?: string;
   limitSwitchType?: string;
-  lastServiceDate?: string; //	Yes /No
-  serviceReminder?: string; // 	Yes/No
+  lastServiceDate?: string;
+  serviceReminder?: string;
+  serviceReminderDate?: string
 }

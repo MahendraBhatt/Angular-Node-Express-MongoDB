@@ -1,151 +1,195 @@
 <div>
-        <div class="row">
-                <div class="col-md-4">
-                        <button type="button" class="btn btn-primary" routerLink="">Back</button><br /><br />
+        <form [formGroup]="rfForm" (ngSubmit)="saveRf()">
+                <div class="row">
+                        <div class="col-md-4">
+                                <button type="button" class="btn btn-primary" routerLink="">Back</button><br /><br />
+                        </div>
+                        <div class="col-md-8">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
                 </div>
-                <div class="col-md-8">
-                        <button (click)="saveRf()" class="btn btn-success">Submit</button>
-                </div>
-        </div>
-        <div class="submit-form">
-                <div *ngIf="!submitted">
-                        <div class="form-group">
+                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                <div class="row">
+                        <div class="col-md-3">
+                                <label for="valveNo">Valve No</label>
+                                <input type="text" maxlength="20" class="form-control" formControlName="valveNo" required
+                                        [ngClass]="{ 'is-invalid': submitted && f.valveNo.errors }" />
+                                <div *ngIf="submitted && f.valveNo.errors" class="invalid-feedback">
+                                        <div *ngIf="f.valveNo.errors.required">Valve No is required
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="tagNo">Tag No</label>
+                                <input type="text" maxlength="20" class="form-control" formControlName="tagNo" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="valveSection">Valve Section</label>
+                                <input type="text" maxlength="20" class="form-control" formControlName="valveSection" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="valveSerialNo">Valve Serial No</label>
+                                <input type="text" maxlength="20" class="form-control" formControlName="valveSerialNo"
+                                        style="text-transform: uppercase;" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="valveMake">Valve Make</label>
+                                <input type="text" maxlength="20" class="form-control" formControlName="valveMake" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="valvePurchaseDate">Valve Purchase Date</label>
                                 <div class="row">
-                                        <div class="col-md-3">
-                                                <label for="valveNo">Valve No</label>
-                                                <input type="text" class="form-control" id="valveNo" required
-                                                        [(ngModel)]="rf.valveNo" name="valveNo" />
+                                        <div class="col-md-6">
+                                                <input type="date" class="form-control" formControlName="valvePurchaseDate" />
                                         </div>
-                                        <div class="col-md-3">
-                                                <label for="tagNo">Tag No</label><input type="text" class="form-control"
-                                                        id="tagNo" [(ngModel)]="rf.tagNo" name="tagNo" />
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="valvePurchaseValue">Valve Purchase Value</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        type="number" class="form-control" maxlength="10" formControlName="valvePurchaseValue" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="warrantyFinishDate">Warranty Finish Date</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input type="date" class="form-control" formControlName="warrantyFinishDate" />
                                         </div>
-                                        <div class="col-md-3">
-                                                <label for="valveSection">Valve Section</label><input type="text"
-                                                        class="form-control" id="valveSection"
-                                                        [(ngModel)]="rf.valveSection" name="valveSection" />
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="serviceDueDate">Service Due Date</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input type="date" class="form-control" formControlName="serviceDueDate" />
                                         </div>
-                                        <div class="col-md-3">
-                                                <label for="valveSerialNo">Valve Serial No</label><input type="text"
-                                                        class="form-control" id="valveSerialNo" style="text-transform: uppercase;"
-                                                        [(ngModel)]="rf.valveSerialNo" name="valveSerialNo" />
-                                        </div>
-                                        <div class="col-md-3">
-                                                <label for="valveMake">Valve Make</label><input type="text"
-                                                        class="form-control" id="valveMake" [(ngModel)]="rf.valveMake"
-                                                        name="valveMake" />
-                                        </div>
-                                        <div class="col-md-3">
-                                                <label for="valvePurchaseDate">Valve Purchase Date</label><input
-                                                        type="date" class="form-control" id="valvePurchaseDate"
-                                                        [(ngModel)]="rf.valvePurchaseDate"
-                                                        name="valvePurchaseDate" />
-                                        </div>
-                                        <div class="col-md-3"><label for="valvePurchaseValue">Valve Purchase
-                                                        Value</label><input type="number" class="form-control"
-                                                        id="valvePurchaseValue" [(ngModel)]="rf.valvePurchaseValue"
-                                                        name="valvePurchaseValue" /></div>
-                                        <div class="col-md-3"><label for="warrantyFinishDate">Warranty Finish
-                                                        Date</label><input type="date" class="form-control"
-                                                        id="warrantyFinishDate" [(ngModel)]="rf.warrantyFinishDate"
-                                                        name="warrantyFinishDate" /></div>
-                                        <div class="col-md-3"><label for="serviceDueDate">Service Due Date</label><input
-                                                        type="date" class="form-control" id="serviceDueDate"
-                                                        [(ngModel)]="rf.serviceDueDate" name="serviceDueDate" /></div>
-                                        <div class="col-md-3">
-                                                <label>Valve Type</label>
-                                                <br>
-                                                <input type="radio" name="valveType" [(ngModel)]="rf.valveType"
-                                                        value="Global" />
-                                                Global
-                                                <input type="radio" name="valveType" [(ngModel)]="rf.valveType"
-                                                        value="Ball" />
-                                                Ball
-                                                <input type="radio" name="valveType" [(ngModel)]="rf.valveType"
-                                                        value="Butterfly" />
-                                                Butterfly
-                                                <input type="radio" name="valveType" [(ngModel)]="rf.valveType"
-                                                        value="Plug" />
-                                                Plug
-                                                <input type="radio" name="valveType" [(ngModel)]="rf.valveType"
-                                                        value="Check" />
-                                                Check
-                                                <input type="radio" name="valveType" [(ngModel)]="rf.valveType"
-                                                        value="Gate" />
-                                                Gate
-                                                <input type="radio" name="valveType" [(ngModel)]="rf.valveType"
-                                                        value="Safety Valve" />
-                                                Safety Valve
-                                        </div>
-                                        <div class="col-md-3">
-                                                <label for="emergencyShutDownValve">Emergency Shut Down Valve</label>
-                                                <select class="form-control" id="emergencyShutDownValve"
-                                                        [(ngModel)]="rf.emergencyShutDownValve"
-                                                        name="emergencyShutDownValve">
-                                                        <option value="Yes">Yes</option>
-                                                        <option value="No">No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="ifBallValve">If Ball Valve</label>
-                                                <select class="form-control" id="ifBallValve"
-                                                        [(ngModel)]="rf.ifBallValve" name="ifBallValve">
-                                                        <option value="V Notch">V Notch</option>
-                                                        <option value="V Port">V Port</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="ifButterflyValve">If Butterfly Valve</label>
-                                                <select class="form-control" id="ifButterflyValve"
-                                                        [(ngModel)]="rf.ifButterflyValve" name="ifButterflyValve">
-                                                        <option value="Concentric">Concentric</option>
-                                                        <option value="Double Offset">Double Offset</option>
-                                                        <option value="Triple Offset">Triple Offset</option>
-                                                        <option value="Eccentric">Eccentric</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="valveTorque">Valve Torque</label><input
-                                                        type="text" class="form-control" id="valveTorque"
-                                                        [(ngModel)]="rf.valveTorque" name="valveTorque" />
-                                        </div>
-                                        <div class="col-md-3"><label for="butterflyVaneMOC">Butterfly Vane MOC</label>
-                                                <select class="form-control" id="butterflyVaneMOC"
-                                                        [(ngModel)]="rf.butterflyVaneMOC" name="butterflyVaneMOC">
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label>Valve Type</label>
+                                <br>
+                                <input type="radio" formControlName="valveType" value="Globe" />
+                                Globe
+                                <input type="radio" formControlName="valveType" value="Ball" />
+                                Ball
+                                <input type="radio" formControlName="valveType" value="Butterfly" />
+                                Butterfly
+                                <input type="radio" formControlName="valveType" value="Plug" />
+                                Plug
+                                <input type="radio" formControlName="valveType" value="Check" />
+                                Check
+                                <input type="radio" formControlName="valveType" value="Gate" />
+                                Gate
+                                <input type="radio" formControlName="valveType" value="Safety Valve" />
+                                Safety Valve
+                        </div>
+                        <div class="col-md-3">
+                                <label for="emergencyShutDownValve">Emergency Shut Down Valve</label>
+                                <select class="form-control" formControlName="emergencyShutDownValve">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="ifBallValve">If Ball Valve</label>
+                                <select class="form-control" formControlName="ifBallValve">
+                                        <option value="V Notch">V Notch</option>
+                                        <option value="V Port">V Port</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3" style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
+                                [ngStyle]="{ 'background-color': f.ifSafetyValve.value == 'Yes' ? '#b2d0f1' : null,
+                                                     'margin-top': f.ifSafetyValve.value == 'Yes' ? '10px' : null }">
+                                <label for="ifSafetyValve">If Safety Valve</label>
+                                <select class="form-control" formControlName="ifSafetyValve">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="ifButterflyValve">If Butterfly Valve</label>
+                                <select class="form-control" formControlName="ifButterflyValve">
+                                        <option value="Concentric">Concentric</option>
+                                        <option value="Double Offset">Double Offset</option>
+                                        <option value="Triple Offset">Triple Offset</option>
+                                        <option value="Eccentric">Eccentric</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="valveTorque">Valve Torque (in NM)</label>
+                                <input type="text" maxlength="10" class="form-control" formControlName="valveTorque" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="butterflyVaneMOC">Butterfly Vane MOC</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <select class="form-control" formControlName="butterflyVaneMOC">
+                                                        <!-- (change)="changeButterflyVaneMOC($event)"> -->
                                                         <option value="SS316">SS316</option>
                                                         <option value="SS304">SS304</option>
                                                         <option value="Other">Other</option>
                                                 </select>
-                                                <input type="text" *ngIf="rf.butterflyVaneMOC == 'Other'"
-                                                        class="form-control" id="butterflyVaneMOCOther"
-                                                        [(ngModel)]="rf.butterflyVaneMOCOther"
-                                                        name="butterflyVaneMOCOther" />
                                         </div>
-                                        <div class="col-md-3">
-                                                <label for="ifSafetyValve">If Safety Valve</label>
-                                                <select class="form-control" id="ifSafetyValve"
-                                                        [(ngModel)]="rf.ifSafetyValve" name="ifSafetyValve">
-                                                        <option value="Yes">Yes</option>
-                                                        <option value="No">No</option>
-                                                </select>
+                                        <div class="col-md-6">
+                                                <input type="text" maxlength="10"
+                                                        *ngIf="f.butterflyVaneMOC.value == 'Other'" class="form-control"
+                                                        formControlName="butterflyVaneMOCOther" />
                                         </div>
-                                        <div class="col-md-3"><label for="lineFluid">Line Fluid</label><input
-                                                        type="text" class="form-control" id="lineFluid"
-                                                        [(ngModel)]="rf.lineFluid" name="lineFluid" /></div>
-                                        <div class="col-md-3"><label for="serviceType">Hazardous /Corrosive
-                                                        Service</label>
-                                                <select class="form-control" id="serviceType"
-                                                        [(ngModel)]="rf.serviceType" name="serviceType">
-                                                        <option value="Yes">Yes</option>
-                                                        <option value="No">No</option>
-                                                </select>
+                                </div>
+                        </div>
+                </div>
+                <div class="row" style="border-bottom-left-radius: 10px; border-top-right-radius: 10px; 
+                                border-bottom-right-radius: 10px; background-color:#b2d0f1; padding: 10px 0px;"
+                        *ngIf="f.ifSafetyValve.value == 'Yes'">
+                        <div class="col-md-3">
+                                <label for="setPressure">Set Pressure</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength="10" type="number" class="form-control" formControlName="setPressure" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="overPressure">Over Pressure</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength="10" type="number" class="form-control" formControlName="overPressure" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="backPressure">Back Pressure</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                maxlength="10" type="number" class="form-control" formControlName="backPressure" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="relievingPressure">Relieving Pressure</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                type="number" maxlength="10" class="form-control" formControlName="relievingPressure" />
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-3">
+                                <label for="lineFluid">Line Fluid</label>
+                                <input type="text" maxlength="20" class="form-control" formControlName="lineFluid" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="serviceType">Hazardous /Corrosive Service</label>
+                                <select class="form-control" formControlName="serviceType">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="lineSize">Line size in inch</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        type="number" maxlength="10" class="form-control" formControlName="lineSize" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="valveSize">Valve size in inch</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        type="number" maxlength="5" class="form-control" formControlName="valveSize" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="flow">Flow value - 1</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                        type="number" maxlength="10" class="form-control" formControlName="flow1" />
                                         </div>
-                                        <div class="col-md-3"><label for="lineSize">Line Size</label><input
-                                                        type="number" class="form-control" id="lineSize"
-                                                        [(ngModel)]="rf.lineSize" name="lineSize" /></div>
-                                        <div class="col-md-3"><label for="valveSize">Valve Size</label><input
-                                                        type="number" class="form-control" id="valveSize"
-                                                        [(ngModel)]="rf.valveSize" name="valveSize" /></div>
-                                        <div class="col-md-3"><label for="flow">Flow</label>
-                                                <select class="form-control" id="flow" [(ngModel)]="rf.flow"
-                                                        name="flow">
+                                        <div class="col-md-6">
+                                                <select class="form-control" formControlName="flow1Unit">
                                                         <option value="Kg/hr">Kg/hr</option>
                                                         <option value="m3/hr">m3/hr</option>
                                                         <option value="LPM">LPM</option>
@@ -153,556 +197,646 @@
                                                         <option value="Ton/H">Ton/H</option>
                                                 </select>
                                         </div>
-                                        <div class="col-md-3"><label for="inletPressure">Inlet Pressure</label>
-                                                <select class="form-control" id="inletPressure"
-                                                        [(ngModel)]="rf.inletPressure" name="inletPressure">
-                                                        <option value="bar">bar</option>
-                                                        <option value="kg/cm2">kg/cm2</option>
-                                                        <option value="psi">psi</option>
-                                                </select>
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="flow">Flow value - 2</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                        type="number" maxlength="10" class="form-control" formControlName="flow2" />
                                         </div>
-                                        <div class="col-md-3"><label for="pressureDifference">Pressure
-                                                        Difference</label>
-                                                <select class="form-control" id="pressureDifference"
-                                                        [(ngModel)]="rf.pressureDifference" name="pressureDifference">
-                                                        <option value="bar">bar</option>
-                                                        <option value="kg/cm2">kg/cm2</option>
-                                                        <option value="psi">psi</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="designPressure">Design Pressure</label>
-                                                <select class="form-control" id="designPressure"
-                                                        [(ngModel)]="rf.designPressure" name="designPressure">
-                                                        <option value="bar">bar</option>
-                                                        <option value="kg/cm2">kg/cm2</option>
-                                                        <option value="psi">psi</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="designTemp">Design Temp</label>
-                                                <select class="form-control" id="designTemp" [(ngModel)]="rf.designTemp"
-                                                        name="designTemp">
-                                                        <option value="bar">bar</option>
-                                                        <option value="kg/cm2">kg/cm2</option>
-                                                        <option value="psi">psi</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="viscosity">Viscosity</label>
-                                                <select class="form-control" id="viscosity" [(ngModel)]="rf.viscosity"
-                                                        name="viscosity">
-                                                        <option value="Cs">Cs</option>
-                                                        <option value="Cp">Cp</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="specificGravity">Specific
-                                                        Gravity</label>
-                                                <input type="text" class="form-control" id="specificGravity"
-                                                        [(ngModel)]="rf.specificGravity" name="specificGravity" />
-                                        </div>
-                                        <div class="col-md-3"><label for="molecularWeight">Molecular
-                                                        Weight</label>
-                                                <input type="text" class="form-control" id="molecularWeight"
-                                                        [(ngModel)]="rf.molecularWeight" name="molecularWeight" />
-                                        </div>
-                                        <div class="col-md-3"><label for="actuatorShutoffPressure">Actuator Shutoff
-                                                        Pressure</label>
-                                                <select class="form-control" id="actuatorShutoffPressure"
-                                                        [(ngModel)]="rf.actuatorShutoffPressure"
-                                                        name="actuatorShutoffPressure">
-                                                        <option value="bar">bar</option>
-                                                        <option value="kg/cm2">kg/cm2</option>
-                                                        <option value="psi">psi</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="valveLiftPercentage">Valve Lift
-                                                        Percentage</label><input type="text" class="form-control"
-                                                        id="valveLiftPercentage" [(ngModel)]="rf.valveLiftPercentage"
-                                                        name="valveLiftPercentage" /></div>
-                                        <div class="col-md-3"><label for="valveNoise">Valve Noise</label><input
-                                                        type="number" class="form-control" id="valveNoise"
-                                                        [(ngModel)]="rf.valveNoise" name="valveNoise" /></div>
-                                        <div class="col-md-3"><label for="designCV">Design CV</label><input type="text"
-                                                        class="form-control" id="designCV" [(ngModel)]="rf.designCV"
-                                                        name="designCV" /></div>
-                                        <div class="col-md-3"><label for="calculatedCV">Calculated CV</label><input
-                                                        type="text" class="form-control" id="calculatedCV"
-                                                        [(ngModel)]="rf.calculatedCV" name="calculatedCV" />
-                                        </div>
-                                        <div class="col-md-3"><label for="bodyMOC">Body MOC</label>
-                                                <select class="form-control" id="bodyMOC" [(ngModel)]="rf.bodyMOC"
-                                                        name="bodyMOC">
-                                                        <option>WCB</option>
-                                                        <option>CF8M</option>
-                                                        <option>CF8</option>
-                                                        <option>PTFE</option>
-                                                        <option>A105</option>
-                                                        <option>WC6</option>
-                                                        <option>WC9</option>
-                                                        <option>LCB</option>
-                                                        <option>WCC</option>
-                                                        <option>LCC</option>
-                                                        <option>C12</option>
-                                                        <option>CF3M</option>
-                                                        <option>CF3</option>
-                                                        <option>Other</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="bodyLining">Body Lining</label>
-                                                <select class="form-control" id="bodyLining" [(ngModel)]="rf.bodyLining"
-                                                        name="bodyLining">
-                                                        <option>PTFE</option>
-                                                        <option>PVDF</option>
-                                                        <option>PFA</option>
-                                                        <option>HALAR</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="endConnection">End Connection</label>
-                                                <select class="form-control" id="endConnection"
-                                                        [(ngModel)]="rf.endConnection" name="endConnection">
-                                                        <option>SW</option>
-                                                        <option>BW</option>
-                                                        <option>Wafer</option>
-                                                        <option>Flange</option>
-                                                        <option>TC end</option>
-                                                        <option>RTJ flange</option>
-                                                        <option>Screwed</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="flangeRating">Flange Rating</label>
-                                                <select class="form-control" id="flangeRating"
-                                                        [(ngModel)]="rf.flangeRating" name="flangeRating">
-                                                        <option>150#</option>
-                                                        <option>300#</option>
-                                                        <option>600#</option>
-                                                        <option>800#</option>
-                                                        <option>900#</option>
-                                                        <option>1500#</option>
-                                                        <option>2500#</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="valveModelNo">Valve Model No</label><input
-                                                        type="text" class="form-control" id="valveModelNo"
-                                                        [(ngModel)]="rf.valveModelNo" name="valveModelNo" />
-                                        </div>
-                                        <div class="col-md-3"><label for="trimSize">Trim Size</label>
-                                                <select class="form-control" id="trimSize" [(ngModel)]="rf.trimSize"
-                                                        name="trimSize">
-                                                        <option>inch</option>
-                                                        <option>NB</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="trimType">Trim Type</label>
-                                                <select class="form-control" id="trimType" [(ngModel)]="rf.trimType"
-                                                        name="trimType">
-                                                        <option>Contoured</option>
-                                                        <option>HF</option>
-                                                        <option>HFD</option>
-                                                        <option>HFT</option>
-                                                        <option>cage design</option>
-                                                        <option>Ported</option>
-                                                        <option>Microspline</option>
-                                                        <option>Ball</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="trimcCharacteristic">Trim
-                                                        Characteristic</label>
-                                                <select class="form-control" id="trimcCharacteristic"
-                                                        [(ngModel)]="rf.trimcCharacteristic" name="trimcCharacteristic">
-                                                        <option>Linear</option>
-                                                        <option>Equal</option>
-                                                        <option>Quick Open</option>
-                                                        <option>On off</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="trimMOC">Trim MOC</label>
-                                                <select class="form-control" id="trimMOC" [(ngModel)]="rf.trimMOC"
-                                                        name="trimMOC">
-                                                        <option>CF8M</option>
-                                                        <option>CF8</option>
-                                                        <option>MONEL</option>
-                                                        <option>HASTELLOY</option>
-                                                        <option>CF3</option>
-                                                        <option>CF3M</option>
-                                                        <option>SS316+PTFE Lining</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="ballValveSeatMOC">Ball Valve Seat
-                                                        MOC</label>
-                                                <select class="form-control" id="ballValveSeatMOC"
-                                                        [(ngModel)]="rf.ballValveSeatMOC" name="ballValveSeatMOC">
-                                                        <option>PTFE</option>
-                                                        <option>RPTFE</option>
-                                                        <option>EPDM</option>
-                                                        <option>PEEK</option>
-                                                        <option>METAL SEAT</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="plugRingsMOC">Plug Rings MOC</label>
-                                                <select class="form-control" id="plugRingsMOC"
-                                                        [(ngModel)]="rf.plugRingsMOC" name="plugRingsMOC">
-                                                        <option>PTFE</option>
-                                                        <option>Graphite</option>
-                                                        <option>Metallic</option>
-                                                        <option>Metallic C seal</option>
-                                                        <option>Spring energized PTFE</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="seatArrangement">Seat
-                                                        Arrangement</label>
-                                                <select class="form-control" id="seatArrangement"
-                                                        [(ngModel)]="rf.seatArrangement" name="seatArrangement">
-                                                        <option>Threaded</option>
-                                                        <option>Clamped</option>
-                                                        <option>Welded</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="glandPacking">Gland Packing</label>
-                                                <select class="form-control" id="glandPacking"
-                                                        [(ngModel)]="rf.glandPacking" name="glandPacking">
-                                                        <option>Graphoil</option>
-                                                        <option>Teflon</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="bodyBonnetGasket">Body Bonnet
-                                                        Gasket</label>
-                                                <select class="form-control" id="bodyBonnetGasket"
-                                                        [(ngModel)]="rf.bodyBonnetGasket" name="bodyBonnetGasket">
-                                                        <option>Graphite + SS insert</option>
-                                                        <option>Graphite</option>
-                                                        <option>PTFE</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="valveBonnetType">Valve Bonnet
-                                                        Type</label>
-                                                <select class="form-control" id="valveBonnetType"
-                                                        [(ngModel)]="rf.valveBonnetType" name="valveBonnetType">
-                                                        <option>Standard</option>
-                                                        <option>Extended</option>
-                                                        <option>Cryogenic</option>
-                                                        <option>Finned</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="bellowSeal">Bellow Seal</label>
-                                                <select class="form-control" id="bellowSeal" [(ngModel)]="rf.bellowSeal"
-                                                        name="bellowSeal">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="bellowSealMOC">Bellow Seal MOC</label>
-                                                <select class="form-control" id="bellowSealMOC"
-                                                        [(ngModel)]="rf.bellowSealMOC" name="bellowSealMOC">
-                                                        <option>S316</option>
-                                                        <option>SS + Titanium</option>
-                                                        <option>PTFE</option>
-                                                        <option>Inconel</option>
-                                                        <option>Hastelloy</option>
-                                                        <option>SS316L</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="leakageClass">Leakage Class</label>
-                                                <select class="form-control" id="leakageClass"
-                                                        [(ngModel)]="rf.leakageClass" name="leakageClass">
-                                                        <option>Class III</option>
-                                                        <option>Class IV</option>
-                                                        <option>Class V</option>
-                                                        <option>Class VI</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="leakageValueAllowed">Leakage Value
-                                                        Allowed</label><input type="text" class="form-control"
-                                                        id="leakageValueAllowed" [(ngModel)]="rf.leakageValueAllowed"
-                                                        name="leakageValueAllowed" /></div>
-                                        <div class="col-md-3"><label for="actuatorType">Actuator Type</label>
-                                                <select class="form-control" id="actuatorType"
-                                                        [(ngModel)]="rf.actuatorType" name="actuatorType">
-                                                        <option>Diaphragm</option>
-                                                        <option>Electric</option>
-                                                        <option>Rack & Pinion</option>
-                                                        <option>Scotch & Yoke</option>
-                                                        <option>Piston</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="actuatorModel">Actuator Model</label><input
-                                                        type="text" class="form-control" id="actuatorModel"
-                                                        [(ngModel)]="rf.actuatorModel" name="actuatorModel" /></div>
-                                        <div class="col-md-3"><label for="fieldReversible">Field
-                                                        Reversible</label>
-                                                <select class="form-control" id="fieldReversible"
-                                                        [(ngModel)]="rf.fieldReversible" name="fieldReversible">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="actuatorTravel">Actuator Travel (in
-                                                        mm)</label><input type="number" class="form-control"
-                                                        id="actuatorTravel" [(ngModel)]="rf.actuatorTravel"
-                                                        name="actuatorTravel" /></div>
-                                        <div class="col-md-3">
-                                                <label for="diaphragMaterial">Diaphragm
-                                                        Material</label>
-                                                <select class="form-control" id="diaphragMaterial"
-                                                        [(ngModel)]="rf.diaphragMaterial" name="diaphragMaterial">
-                                                        <option>Nitrile</option>
-                                                        <option>EPDM</option>
-                                                        <option>Neoprene</option>
-                                                        <option>Viton</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="airPressureRequired">Air Pressure
-                                                        Required</label>
-                                                <select class="form-control" id="airPressureRequired"
-                                                        [(ngModel)]="rf.airPressureRequired" name="airPressureRequired">
-                                                        <option value="bar">bar</option>
-                                                        <option value="kg/cm2">kg/cm2</option>
-                                                        <option value="psi">psi</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="springRange">Spring Range</label>
-                                                <select class="form-control" id="springRange"
-                                                        [(ngModel)]="rf.springRange" name="springRange">
-                                                        <option value="bar">bar</option>
-                                                        <option value="kg/cm2">kg/cm2</option>
-                                                        <option value="psi">psi</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="springMOC">Spring MOC</label>
-                                                <select class="form-control" id="springMOC" [(ngModel)]="rf.springMOC"
-                                                        name="springMOC">
-                                                        <option>CS</option>
-                                                        <option>Tungsten alloy steel</option>
-                                                        <option>High temp alloy steel</option>
-                                                        <option>Chrome alloy steel</option>
-                                                        <option>Inconel</option>
-                                                        <option>Spring Steel</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="positionerType">Positioner Type</label>
-                                                <select class="form-control" id="positionerType"
-                                                        [(ngModel)]="rf.positionerType" name="positionerType">
-                                                        <option>Electro pneumatic</option>
-                                                        <option>Pneumatic</option>
-                                                        <option>No positioner</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="modelNoOfPositioner">Model No Of
-                                                        Positioner</label><input type="text" class="form-control"
-                                                        id="modelNoOfPositioner" [(ngModel)]="rf.modelNoOfPositioner"
-                                                        name="modelNoOfPositioner" /></div>
-                                        <div class="col-md-3"><label for="ePArea">EP Area</label>
-                                                <select class="form-control" id="ePArea" [(ngModel)]="rf.ePArea"
-                                                        name="ePArea">
-                                                        <option>Flameproof</option>
-                                                        <option>Weatherproof</option>
-                                                        <option>Intrinsic safe</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="aFRMake">AFR Make</label><input type="text"
-                                                        class="form-control" id="aFRMake" [(ngModel)]="rf.aFRMake"
-                                                        name="aFRMake" /></div>
-                                        <div class="col-md-3"><label for="aFRModel">AFR Model</label><input type="text"
-                                                        class="form-control" id="aFRModel" [(ngModel)]="rf.aFRModel"
-                                                        name="aFRModel" /></div>
-                                        <div class="col-md-3"><label for="aFRFilterSize">AFR Filter Size</label>
-                                                <select class="form-control" id="aFRFilterSize"
-                                                        [(ngModel)]="rf.aFRFilterSize" name="aFRFilterSize">
-                                                        <option>5 microns</option>
-                                                        <option>25 microns</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="aFRFilterMOC">AFR Filter MOC</label>
-                                                <select class="form-control" id="aFRFilterMOC"
-                                                        [(ngModel)]="rf.aFRFilterMOC" name="aFRFilterMOC">
-                                                        <option>Sintered Bronze</option>
-                                                        <option>SS</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="positionerTransmitter">Positioner
-                                                        Transmitter</label>
-                                                <select class="form-control" id="positionerTransmitter"
-                                                        [(ngModel)]="rf.positionerTransmitter"
-                                                        name="positionerTransmitter">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="positionTransmitterType">Position Transmitter
-                                                        Type</label><input type="text" class="form-control"
-                                                        id="positionTransmitterType"
-                                                        [(ngModel)]="rf.positionTransmitterType"
-                                                        name="positionTransmitterType" /></div>
-                                        <div class="col-md-3"><label for="positionTransmitterMake">Position Transmitter
-                                                        Make</label><input type="text" class="form-control"
-                                                        id="positionTransmitterMake"
-                                                        [(ngModel)]="rf.positionTransmitterMake"
-                                                        name="positionTransmitterMake" /></div>
-                                        <div class="col-md-3"><label for="positionTransmitterModel">Position Transmitter
-                                                        Model</label><input type="text" class="form-control"
-                                                        id="positionTransmitterModel"
-                                                        [(ngModel)]="rf.positionTransmitterModel"
-                                                        name="positionTransmitterModel" /></div>
-                                        <div class="col-md-3"><label for="positionTransmitterArea">Position Transmitter
-                                                        Area</label>
-                                                <select class="form-control" id="positionTransmitterArea"
-                                                        [(ngModel)]="rf.positionTransmitterArea"
-                                                        name="positionTransmitterArea">
-                                                        <option>Flameproof</option>
-                                                        <option>Weatherproof</option>
-                                                        <option>Intrinsic safe</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="solenoidValveType">Solenoid Valve
-                                                        Type</label>
-                                                <select class="form-control" id="solenoidValveType"
-                                                        [(ngModel)]="rf.solenoidValveType" name="solenoidValveType">
-                                                        <option>3/2</option>
-                                                        <option>5/2</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="solenoidValveMOC">Solenoid Valve
-                                                        MOC</label>
-                                                <select class="form-control" id="solenoidValveMOC"
-                                                        [(ngModel)]="rf.solenoidValveMOC" name="solenoidValveMOC">
-                                                        <option>Aluminum</option>
-                                                        <option>SS316</option>
-                                                        <option>SS304</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="solenoidValveArea">Solenoid Valve
-                                                        Area</label>
-                                                <select class="form-control" id="solenoidValveArea"
-                                                        [(ngModel)]="rf.solenoidValveArea" name="solenoidValveArea">
-                                                        <option>Flameproof</option>
-                                                        <option>Weatherproof</option>
-                                                        <option>Intrinsic safe</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="solenoidValveMake">Solenoid Valve
-                                                        Make</label>
-                                                <select class="form-control" id="solenoidValveMake"
-                                                        [(ngModel)]="rf.solenoidValveMake" name="solenoidValveMake">
-                                                        <option>Rotex</option>
-                                                        <option>ASCO</option>
-                                                        <option>Other</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="machNoExceeding">Mach No
-                                                        Exceeding</label>
-                                                <select class="form-control" id="machNoExceeding"
-                                                        [(ngModel)]="rf.machNoExceeding" name="machNoExceeding">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="velocityExceeding">Velocity
-                                                        Exceeding</label>
-                                                <select class="form-control" id="velocityExceeding"
-                                                        [(ngModel)]="rf.velocityExceeding" name="velocityExceeding">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="stelliting">Stelliting</label>
-                                                <select class="form-control" id="stelliting" [(ngModel)]="rf.stelliting"
-                                                        name="stelliting">
-                                                        <option>Full</option>
-                                                        <option>Face</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="lapping">Lapping</label>
-                                                <select class="form-control" id="lapping" [(ngModel)]="rf.lapping"
-                                                        name="lapping">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="nitriding">Nitriding</label>
-                                                <select class="form-control" id="nitriding" [(ngModel)]="rf.nitriding"
-                                                        name="nitriding">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="iBR">IBR</label>
-                                                <select class="form-control" id="iBR" [(ngModel)]="rf.iBR" name="iBR">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="failSafeAction">Fail Safe Action</label>
-                                                <select class="form-control" id="failSafeAction"
-                                                        [(ngModel)]="rf.failSafeAction" name="failSafeAction">
-                                                        <option>Close</option>
-                                                        <option>Open</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="limitSwitch">Limit Switch</label>
-                                                <select class="form-control" id="limitSwitch"
-                                                        [(ngModel)]="rf.limitSwitch" name="limitSwitch">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="limitSwitchMake">Limit Switch
-                                                        Make</label>
-                                                <select class="form-control" id="limitSwitchMake"
-                                                        [(ngModel)]="rf.limitSwitchMake" name="limitSwitchMake">
-                                                        <option>Jai Balaji</option>
-                                                        <option>ROTEX</option>
-                                                        <option>Sankey</option>
-                                                        <option>P & F</option>
-                                                        <option>Duncan</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="limitSwitchType">Limit Switch
-                                                        Type</label>
-                                                <select class="form-control" id="limitSwitchType"
-                                                        [(ngModel)]="rf.limitSwitchType" name="limitSwitchType">
-                                                        <option>Proximity</option>
-                                                        <option>Mechanical</option>
-                                                </select>
-                                        </div>
-                                        <div class="col-md-3"><label for="lastServiceDate">Last Service
-                                                        Date</label>
-                                                <input type="date" class="form-control" id="lastServiceDate"
-                                                        [(ngModel)]="rf.lastServiceDate" name="lastServiceDate" />
-                                        </div>
-                                        <div class="col-md-3"><label for="serviceReminder">Service
-                                                        Reminder</label>
-                                                <select class="form-control" id="serviceReminder"
-                                                        [(ngModel)]="rf.serviceReminder" name="serviceReminder">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
+                                        <div class="col-md-6">
+                                                <select class="form-control" formControlName="flow2Unit">
+                                                        <option value="Kg/hr">Kg/hr</option>
+                                                        <option value="m3/hr">m3/hr</option>
+                                                        <option value="LPM">LPM</option>
+                                                        <option value="LPH">LPH </option>
+                                                        <option value="Ton/H">Ton/H</option>
                                                 </select>
                                         </div>
                                 </div>
                         </div>
-                        <ul class="nav nav-tabs">
-                                <li class="nav-item">
-                                        <a class="nav-link active" href="#">Active</a>
-                                </li>
-                                <li class="nav-item">
-                                        <a class="nav-link" href="#">Link</a>
-                                </li>
-                                <li class="nav-item">
-                                        <a class="nav-link" href="#">Link</a>
-                                </li>
-                        </ul>
+                        <div class="col-md-3">
+                                <label for="flow">Flow value - 3</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                        type="number" maxlength="10" class="form-control" formControlName="flow3" />
+                                        </div>
+                                        <div class="col-md-6">
+                                                <select class="form-control" formControlName="flow3Unit">
+                                                        <option value="Kg/hr">Kg/hr</option>
+                                                        <option value="m3/hr">m3/hr</option>
+                                                        <option value="LPM">LPM</option>
+                                                        <option value="LPH">LPH </option>
+                                                        <option value="Ton/H">Ton/H</option>
+                                                </select>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-3">
+                                <label for="flow">Inlet Pressure value - 1</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        type="number" maxlength="5" class="form-control" formControlName="inletPressure1" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="flow">Inlet Pressure value - 2</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        type="number" maxlength="5" class="form-control" formControlName="inletPressure2" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="flow">Inlet Pressure value - 3</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        type="number" maxlength="5" class="form-control" formControlName="inletPressure3" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="pressureDifference">Pressure difference </label>
+                                <select class="form-control" formControlName="pressureDifference">
+                                        <option value="bar">bar</option>
+                                        <option value="kg/cm2">kg/cm2</option>
+                                        <option value="psi">psi</option>
+                                </select>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-3">
+                                <label for="designPressure">Design pressure</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input type="text" maxlength="5" class="form-control"
+                                                formControlName="designPressure" />
+                                        </div>
+                                        <div class="col-md-6">
+                                                <select class="form-control" formControlName="designPressureUnit">
+                                                        <option value="bar">bar</option>
+                                                        <option value="kg/cm2">kg/cm2</option>
+                                                        <option value="psi">psi</option>
+                                                </select>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="designTemp">Design Temp</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input type="text" maxlength="5" class="form-control" formControlName="designTemp" />
+                                        </div>
+                                        <div class="col-md-6">
+                                                <select class="form-control" formControlName="designTempUnit">
+                                                        <option value="Degree">Degree</option>
+                                                        <option value="Celsius">Celsius</option>
+                                                </select>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="viscosity">Viscosity</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input type="text" maxlength="5" class="form-control" formControlName="viscosity" />
+                                        </div>
+                                        <div class="col-md-6">
+                                                <select class="form-control" formControlName="viscosityUnit">
+                                                        <option value="Cp">Cp</option>
+                                                        <option value="Cs">Cs</option>
+                                                </select>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="specificGravity">Specific Gravity</label>
+                                <input type="text" maxlength="5" class="form-control" formControlName="specificGravity" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="molecularWeight">Molecular Weight</label>
+                                <input type="text" maxlength="5" class="form-control" formControlName="molecularWeight" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="actuatorShutoffPressure">Actuator Shutoff Pressure</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input type="text" maxlength="5" class="form-control"
+                                                formControlName="actuatorShutoffPressure" />
+                                        </div>
+                                        <div class="col-md-6">
+                                                <select class="form-control" formControlName="actuatorShutoffPressureUnit">
+                                                        <option value="bar">bar</option>
+                                                        <option value="kg/cm2">kg/cm2</option>
+                                                        <option value="psi">psi</option>
+                                                </select>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="valveLiftPercentage">Valve Lift %</label>
+                                <div class="row">
+                                        <div class="col-md-4">
+                                                (1)<br>
+                                                <input type="text" maxlength="3" class="form-control"
+                                                formControlName="valveLiftPercentage1" />
+                                        </div>
+                                        <div class="col-md-4">
+                                                (2)<br>
+                                                <input type="text" maxlength="3" class="form-control"
+                                                formControlName="valveLiftPercentage2" />
+                                        </div>
+                                        <div class="col-md-4">
+                                                (3)<br>
+                                                <input type="text" maxlength="3" class="form-control"
+                                                formControlName="valveLiftPercentage3" />
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="valveNoise">Valve Noise in db</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        type="number" maxlength="3" class="form-control" formControlName="valveNoise" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="designCV">Design CV</label>
+                                <input type="text" maxlength="5" class="form-control" formControlName="designCV" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="calculatedCV">Calculated CV</label>
+                                <div class="row">
+                                        <div class="col-md-4">
+                                                (1)<br>
+                                                <input type="text" maxlength="5" class="form-control" formControlName="calculatedCV1" />
+                                        </div>
+                                        <div class="col-md-4">
+                                                (2)<br>
+                                                <input type="text" maxlength="5" class="form-control" formControlName="calculatedCV2" />
+                                        </div>
+                                        <div class="col-md-4">
+                                                (3)<br>
+                                                <input type="text" maxlength="5" class="form-control" formControlName="calculatedCV3" />
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="bodyMOC">Body MOC</label>
+                                <select class="form-control" formControlName="bodyMOC">
+                                        <option>WCB</option>
+                                        <option>CF8M</option>
+                                        <option>CF8</option>
+                                        <option>PTFE</option>
+                                        <option>A105</option>
+                                        <option>WC6</option>
+                                        <option>WC9</option>
+                                        <option>LCB</option>
+                                        <option>WCC</option>
+                                        <option>LCC</option>
+                                        <option>C12</option>
+                                        <option>CF3M</option>
+                                        <option>CF3</option>
+                                        <option>Other</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="bodyLining">Body Lining</label>
+                                <select class="form-control" formControlName="bodyLining">
+                                        <option>PTFE</option>
+                                        <option>PVDF</option>
+                                        <option>PFA</option>
+                                        <option>HALAR</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="endConnection">End Connection</label>
+                                <select class="form-control" formControlName="endConnection">
+                                        <option>SW</option>
+                                        <option>BW</option>
+                                        <option>Wafer</option>
+                                        <option>Flange</option>
+                                        <option>TC end</option>
+                                        <option>RTJ flange</option>
+                                        <option>Screwed</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="flangeRating">Flange Rating</label>
+                                <select class="form-control" formControlName="flangeRating">
+                                        <option>150#</option>
+                                        <option>300#</option>
+                                        <option>600#</option>
+                                        <option>800#</option>
+                                        <option>900#</option>
+                                        <option>1500#</option>
+                                        <option>2500#</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="valveModelNo">Valve Model No</label>
+                                <input type="text" class="form-control" formControlName="valveModelNo" />
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-3">
+                                <label for="trimSize">Trim Size</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input type="text" maxlength="5" class="form-control" formControlName="trimSize" />
+                                        </div>
+                                        <div class="col-md-6">
+                                                <select class="form-control" formControlName="trimSizeUnit">
+                                                        <option>inch</option>
+                                                        <option>NB</option>
+                                                </select>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3"><label for="trimType">Trim Type</label>
+                                <select class="form-control" formControlName="trimType">
+                                        <option>Contoured</option>
+                                        <option>HF</option>
+                                        <option>HFD</option>
+                                        <option>HFT</option>
+                                        <option>cage design</option>
+                                        <option>Ported</option>
+                                        <option>Microspline</option>
+                                        <option>Ball</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="trimcCharacteristic">Trim Characteristic</label><br>
+                                <input type="radio" formControlName="trimcCharacteristic" value="Linear" />
+                                Linear
+                                <input type="radio" formControlName="trimcCharacteristic" value="Equal" />
+                                Equal
+                                <input type="radio" formControlName="trimcCharacteristic" value="Quick Open" />
+                                Quick Open
+                                <input type="radio" formControlName="trimcCharacteristic" value="On off" />
+                                On off
+                        </div>
+                        <div class="col-md-3"><label for="trimMOC">Trim MOC</label>
+                                <select class="form-control" formControlName="trimMOC">
+                                        <option>CF8M</option>
+                                        <option>CF8</option>
+                                        <option>MONEL</option>
+                                        <option>HASTELLOY</option>
+                                        <option>CF3</option>
+                                        <option>CF3M</option>
+                                        <option>SS316+PTFE Lining</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="ballValveSeatMOC">Ball Valve Seat MOC</label>
+                                <select class="form-control" formControlName="ballValveSeatMOC">
+                                        <option>PTFE</option>
+                                        <option>RPTFE</option>
+                                        <option>EPDM</option>
+                                        <option>PEEK</option>
+                                        <option>METAL SEAT</option>
+                                        <option>Not applicable</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="plugRingsMOC">Plug Rings MOC</label>
+                                <select class="form-control" formControlName="plugRingsMOC">
+                                        <option>PTFE</option>
+                                        <option>Graphite</option>
+                                        <option>Metallic</option>
+                                        <option>Metallic C seal</option>
+                                        <option>Spring energized PTFE</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="seatArrangement">Seat Arrangement</label>
+                                <select class="form-control" formControlName="seatArrangement">
+                                        <option>Threaded</option>
+                                        <option>Clamped</option>
+                                        <option>Welded</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="glandPacking">Gland Packing</label><br />
+                                <input type="radio" formControlName="glandPacking" value="Graphoil" />
+                                Graphoil
+                                <input type="radio" formControlName="glandPacking" value="Teflon" />
+                                Teflon
+                        </div>
+                        <div class="col-md-3"><label for="bodyBonnetGasket">Body Bonnet
+                                        Gasket</label>
+                                <select class="form-control" formControlName="bodyBonnetGasket">
+                                        <option>Graphite + SS insert</option>
+                                        <option>Graphite</option>
+                                        <option>PTFE</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="valveBonnetType">Valve Bonnet
+                                        Type</label>
+                                <select class="form-control" formControlName="valveBonnetType">
+                                        <option>Standard</option>
+                                        <option>Extended</option>
+                                        <option>Cryogenic</option>
+                                        <option>Finned</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="bellowSeal">Bellow Seal</label>
+                                <select class="form-control" formControlName="bellowSeal">
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <div *ngIf="f.bellowSeal.value == 'Yes'">
+                                        <label for="bellowSealMOC">Bellow Seal MOC</label>
+                                        <select class="form-control" formControlName="bellowSealMOC">
+                                                <option>S316</option>
+                                                <option>SS + Titanium</option>
+                                                <option>PTFE</option>
+                                                <option>Inconel</option>
+                                                <option>Hastelloy</option>
+                                                <option>SS316L</option>
+                                        </select>
+                                </div>
+                        </div>
+                        <div class="col-md-3"><label for="leakageClass">Leakage Class</label>
+                                <select class="form-control" formControlName="leakageClass">
+                                        <option>Class II</option>
+                                        <option>Class III</option>
+                                        <option>Class IV</option>
+                                        <option>Class V</option>
+                                        <option>Class VI</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="leakageValueAllowed">Leakage Value Allowed</label>
+                                <input type="text" class="form-control" formControlName="leakageValueAllowed" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="actuatorType">Actuator Type</label>
+                                <select class="form-control" formControlName="actuatorType">
+                                        <option>Diaphragm</option>
+                                        <option>Electric</option>
+                                        <option>Rack & Pinion</option>
+                                        <option>Scotch & Yoke</option>
+                                        <option>Piston</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="actuatorModel">Actuator Model</label>
+                                <input type="text" maxlength="20" class="form-control" formControlName="actuatorModel" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="fieldReversible">Field Reversible</label>
+                                <select class="form-control" formControlName="fieldReversible">
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="actuatorTravel">Actuator Travel (in mm)</label>
+                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        type="number" maxlength="5" class="form-control" formControlName="actuatorTravel" />
+                        </div>
+                        <div class="col-md-3">
+                                <label for="diaphragMaterial">Diaphragm Material</label>
+                                <select class="form-control" formControlName="diaphragMaterial">
+                                        <option>Nitrile</option>
+                                        <option>EPDM</option>
+                                        <option>Neoprene</option>
+                                        <option>Viton</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="airPressureRequired">Air Pressure Required</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input type="text" maxlength="3" class="form-control"
+                                                formControlName="airPressureRequired" />
+                                        </div>
+                                        <div class="col-md-6">
+                                                <select class="form-control" formControlName="airPressureRequiredUnit">
+                                                        <option value="bar">bar</option>
+                                                        <option value="kg/cm2">kg/cm2</option>
+                                                        <option value="psi">psi</option>
+                                                </select>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="springRange">Spring Range</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input type="text" maxlength="20" class="form-control" formControlName="springRange" />
+                                        </div>
+                                        <div class="col-md-6">
+                                                <select class="form-control" formControlName="springRange">
+                                                        <option value="bar">bar</option>
+                                                        <option value="kg/cm2">kg/cm2</option>
+                                                        <option value="psi">psi</option>
+                                                </select>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3"><label for="springMOC">Spring MOC</label>
+                                <select class="form-control" formControlName="springMOC">
+                                        <option>CS</option>
+                                        <option>Tungsten alloy steel</option>
+                                        <option>High temp alloy steel</option>
+                                        <option>Chrome alloy steel</option>
+                                        <option>Inconel</option>
+                                        <option>Spring Steel</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="ePArea">EP Area</label>
+                                <select class="form-control" formControlName="ePArea">
+                                        <option>Flameproof</option>
+                                        <option>Weatherproof</option>
+                                        <option>Intrinsic safe</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-3"><label for="aFRMake">AFR Make</label><input type="text"
+                                        class="form-control" formControlName="aFRMake" /></div>
+                        <div class="col-md-3"><label for="aFRModel">AFR Model</label><input type="text"
+                                        class="form-control" formControlName="aFRModel" /></div>
+                        <div class="col-md-3"><label for="aFRFilterSize">AFR Filter Size</label>
+                                <select class="form-control" formControlName="aFRFilterSize">
+                                        <option>5 microns</option>
+                                        <option>25 microns</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="aFRFilterMOC">AFR Filter MOC</label>
+                                <select class="form-control" formControlName="aFRFilterMOC">
+                                        <option>Sintered Bronze</option>
+                                        <option>SS</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="positionerType">Positioner Type</label>
+                                <select class="form-control" formControlName="positionerType">
+                                        <option>Electro pneumatic</option>
+                                        <option>Pneumatic</option>
+                                        <option>No positioner</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="modelNoOfPositioner">Model No Of Positioner</label>
+                                <input type="text" class="form-control" formControlName="modelNoOfPositioner" />
+                        </div>
+                        <div class="col-md-3" style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
+                                [ngStyle]="{ 'background-color': f.positionerTransmitter.value == 'Yes' ? '#b2d0f1' : null,
+                                                     'margin-top': f.positionerTransmitter.value == 'Yes' ? '10px' : null }">
+                                <label for="positionerTransmitter">Positioner Transmitter</label>
+                                <select class="form-control" formControlName="positionerTransmitter">
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                </div>
+                <div class="row" style="border-radius: 10px;  background-color:#b2d0f1; padding: 10px 0px; "
+                        *ngIf="f.positionerTransmitter.value == 'Yes'">
+                        <div class="col-md-3"><label for="positionTransmitterType">Position Transmitter
+                                        Type</label><input type="text" class="form-control" formControlName="positionTransmitterType" /></div>
+                        <div class="col-md-3"><label for="positionTransmitterMake">Position Transmitter
+                                        Make</label><input type="text" class="form-control" formControlName="positionTransmitterMake" /></div>
+                        <div class="col-md-3"><label for="positionTransmitterModel">Position Transmitter
+                                        Model</label><input type="text" class="form-control" formControlName="positionTransmitterModel" /></div>
+                        <div class="col-md-3"><label for="positionTransmitterArea">Position Transmitter
+                                        Area</label>
+                                <select class="form-control" formControlName="positionTransmitterArea">
+                                        <option>Flameproof</option>
+                                        <option>Weatherproof</option>
+                                        <option>Intrinsic safe</option>
+                                </select>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-3"><label for="solenoidValveType">Solenoid Valve
+                                        Type</label>
+                                <select class="form-control" formControlName="solenoidValveType">
+                                        <option>3/2</option>
+                                        <option>5/2</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="solenoidValveMOC">Solenoid Valve
+                                        MOC</label>
+                                <select class="form-control" formControlName="solenoidValveMOC">
+                                        <option>Aluminum</option>
+                                        <option>SS316</option>
+                                        <option>SS304</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="solenoidValveArea">Solenoid Valve
+                                        Area</label>
+                                <select class="form-control" formControlName="solenoidValveArea">
+                                        <option>Flameproof</option>
+                                        <option>Weatherproof</option>
+                                        <option>Intrinsic safe</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="solenoidValveMake">Solenoid Valve
+                                        Make</label>
+                                <select class="form-control" formControlName="solenoidValveMake">
+                                        <option>Rotex</option>
+                                        <option>ASCO</option>
+                                        <option>Other</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="machNoExceeding">Mach No
+                                        Exceeding</label>
+                                <select class="form-control" formControlName="machNoExceeding">
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="velocityExceeding">Velocity
+                                        Exceeding</label>
+                                <select class="form-control" formControlName="velocityExceeding">
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="stelliting">Stelliting</label>
+                                <select class="form-control" formControlName="stelliting">
+                                        <option>Full</option>
+                                        <option>Face</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="lapping">Lapping</label>
+                                <select class="form-control" formControlName="lapping">
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="nitriding">Nitriding (above 350 degree)</label>
+                                <select class="form-control" formControlName="nitriding">
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="iBR">IBR</label>
+                                <select class="form-control" formControlName="iBR">
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="failSafeAction">Fail Safe Action</label>
+                                <select class="form-control" formControlName="failSafeAction">
+                                        <option>Close</option>
+                                        <option>Open</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="limitSwitch">Limit Switch</label>
+                                <select class="form-control" formControlName="limitSwitch">
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="limitSwitchMake">Limit Switch
+                                        Make</label>
+                                <select class="form-control" formControlName="limitSwitchMake">
+                                        <option>Jai Balaji</option>
+                                        <option>ROTEX</option>
+                                        <option>Sankey</option>
+                                        <option>P & F</option>
+                                        <option>Duncan</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3"><label for="limitSwitchType">Limit Switch
+                                        Type</label>
+                                <select class="form-control" formControlName="limitSwitchType">
+                                        <option>Proximity</option>
+                                        <option>Mechanical</option>
+                                </select>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="lastServiceDate">Last Service Date</label>
+                                <div class="row">
+                                        <div class="col-md-6">
+                                                <input type="date" class="form-control" formControlName="lastServiceDate" />
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-md-3">
+                                <label for="serviceReminder">Service Reminder</label>
+                                <div class="row">
+                                        <div class="col-md-4">
+                                                <select class="form-control" formControlName="serviceReminder">
+                                                        <option>Yes</option>
+                                                        <option>No</option>
+                                                </select>
+                                        </div>
+                                        <div class="col-md-5" *ngIf="f.serviceReminder.value == 'Yes'">
+                                                <input type="date" class="form-control" formControlName="serviceReminderDate" />
+                                        </div>
+                                </div>
+
+                        </div>
                 </div>
                 <div class="row">
                         <div class="col-md-4">
                         </div>
                         <div class="col-md-8">
-                                <button (click)="saveRf()" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                 </div>
-                <!-- <div *ngIf="submitted">
-        <h4>Rf was submitted successfully!</h4>
-        <button class="btn btn-success" (click)="newRf()">Add</button>
-      </div> -->
-        </div>
+        </form>
 </div>

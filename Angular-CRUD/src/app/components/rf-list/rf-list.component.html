@@ -13,7 +13,7 @@
     <button type="button" class="btn btn-primary" routerLink="/add">Add</button>
   </div>
   <div class="col-md-7">
-    <button type="button" class="btn btn-primary" (click)="flUpload.click()">Upload</button>
+    <button type="button" class="btn btn-primary" style="display: none;" (click)="flUpload.click()">Upload</button>
     <div style="display: none;">
       <input type="file" #flUpload (change)="onFileChange($event)" multiple="false" value="Upload" />
     </div>

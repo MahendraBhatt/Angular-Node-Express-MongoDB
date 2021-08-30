@@ -13,4 +13,15 @@
 
 # [START gae_flex_quickstart_yaml]
 runtime: nodejs14
+env: standard
+instance_class: F1
+handlers:
+  - url: .*
+    script: auto
+automatic_scaling:
+  min_idle_instances: 0
+  max_idle_instances: 0
+  min_pending_latency: automatic
+  max_pending_latency: automatic
+network: {}
 # [END gae_flex_quickstart_yaml]

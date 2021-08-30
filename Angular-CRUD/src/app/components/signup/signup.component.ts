@@ -29,7 +29,8 @@ export class SignupComponent implements OnInit {
 
   createUser() {
     this.submitted = true;
-
+    this.signupForm.controls['email'].setErrors(null);
+    //console.log(this.signupForm.controls['phoneNumber'].errors);
     // stop here if form is invalid
     if (this.signupForm.invalid) {
       return;
@@ -39,12 +40,15 @@ export class SignupComponent implements OnInit {
 
     this.User.createNewUser(this.signupForm.value).subscribe(
       (data: any) => {
+        this.submitted = false;
         this.router.navigate(['/login']);
       },
       (err: HttpErrorResponse) => {
         this.error = err.error.msg;
+        if (err.error.message.toLowerCase().indexOf('email already in use') >= 0) {
+          this.signupForm.controls['email'].setErrors({ exists: true });
+        }
         this.loading = false;
-        this.submitted = false;
       }
     );
   }

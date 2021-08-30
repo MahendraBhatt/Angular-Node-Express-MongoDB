@@ -6,11 +6,12 @@
         <div class="row">
             <div class="col-md-12">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name"
+                <input type="text" class="form-control" id="name" maxlength="100" pattern="[A-Za-z]*"
                     [ngClass]="{ 'is-invalid': submitted && f.name.errors }" required formControlName="name"
                     name="name" />
                 <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                     <div *ngIf="f.name.errors.required">Name is required</div>
+                    <div *ngIf="f.name.errors.pattern">Name is not valid</div>
                 </div>
             </div>
         </div>
@@ -18,12 +19,13 @@
         <div class="row">
             <div class="col-md-12">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" email
-                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required formControlName="email"
+                <input type="email" class="form-control" id="email" email maxlength="100"
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors}" required formControlName="email"
                     name="email" />
                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                     <div *ngIf="f.email.errors.required">Email is required</div>
                     <div *ngIf="f.email.errors.email">Email is not valid</div>
+                    <div *ngIf="f.email.errors.exists">Email already exists</div>
                 </div>
             </div>
         </div>
@@ -31,11 +33,12 @@
         <div class="row">
             <div class="col-md-12">
                 <label for="phone">Phone</label>
-                <input type="text" class="form-control" id="phoneNumber" 
+                <input class="form-control" id="phoneNumber" type="text" pattern="\d*" maxlength="20"
                     [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" required
                     formControlName="phoneNumber" name="phoneNumber" />
                 <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
                     <div *ngIf="f.phoneNumber.errors.required">Phone number is required</div>
+                    <div *ngIf="f.phoneNumber.errors.pattern">Phone number is not valid</div>
                 </div>
             </div>
         </div>

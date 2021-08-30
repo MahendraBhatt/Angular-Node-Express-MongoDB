@@ -81,7 +81,7 @@ export class RfListComponent implements OnInit {
           const { rf, totalItems } = response;
           this.rf = rf;
           this.count = totalItems;
-          console.log(response);
+          //console.log(response);
         },
         error => {
           console.log(error);
